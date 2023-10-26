@@ -1,3 +1,4 @@
+/** All code unless stated otherwise is made by github user @Zazcallabah */
 var makePage = function( storage, tools, model ) { return {
 
 /*
@@ -39,6 +40,15 @@ validateFields: function()
 		if( level > 30 ) // new level cap in 1.3
 			model.level( 30 );
 	}
+	/**Code made by @SeeYou-Man*/
+	else if(model.version()=== "1.20.2")
+	{
+		if(level > 30)
+			{
+				model.level(30) // Unsure if this is still the level cap in 1.20.2
+			}
+	}
+
 	else
 	{
 		if( level > 50 )

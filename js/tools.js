@@ -1,3 +1,4 @@
+/** All code unless stated otherwise is made by github user @Zazcallabah */
 var makeTools = function () { return {
 
 foreach: function( list, callback, order )

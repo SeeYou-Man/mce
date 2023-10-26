@@ -1,3 +1,4 @@
+/** All code unless stated otherwise is made by github user @Zazcallabah */
 var makeStorage = function() {
 	var dataLabel = "mce_data_version_9000";
 

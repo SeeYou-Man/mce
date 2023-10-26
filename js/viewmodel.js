@@ -1,3 +1,4 @@
+/** All code unless stated otherwise is made by github user @Zazcallabah */
 /*
   Constructor function for the view model object. See knockoutjs.com for details on knockout, viewmodels and the mvvm-pattern.
   In short: We add properties to the viewmodel that can be read and updated by the html elements on the page.
@@ -10,26 +11,46 @@ var makeViewModel = function()
 	model.enchantmentMode = ko.computed(function(){return model.mode() === "enchantment" },model);
 	model.levelMode = ko.computed(function(){return model.mode() === "level" },model);
 	model.availableMaterials = ko.observableArray([
-		{name:'Diamond',value: 0},
-		{name:'Iron',value: 1},
-		{name:'Gold',value: 2},
-		{name:'Leather',value: 3},
-		{name:'Stone',value: 4},
-		{name:'Chainmail',value: 5},
-		{name:'Wood',value: 6}]);
+		/**Made by @SeeYou-Man */
+		{name:'Wood',value: 0},
+		{name:'Leather',value: 1},
+		{name:'Stone',value: 2},
+		{name:'Chain',value:3},
+		{name:'Iron',value: 4},
+		{name:'Gold',value: 5},
+		{name:'Diamond',value: 6},
+		{name:'Turtle',value: 7},
+		{name:'Netherite',value: 8},
+		{name:'Other',value: 9},
+	]);
 	model.availableItems = ko.observableArray([
-		{name:'Pickaxe',value: 0},
-		{name:'Sword',value: 1},
-		{name:'Axe',value: 2},
-		{name:'Shovel',value: 3},
-		{name:'Helmet',value: 4},
-		{name:'Chestplate',value: 5},
-		{name:'Leggings',value: 6},
-		{name:'Boots',value: 7},
-		{name:'Bow',value: 8}]);
+		/**@SeeYou-Man
+		 * Changes: Added tolls and weapons which did not exists in 1.3
+		 * hopefully this won't break anything whith those older versions*/
+		{name:'Book',value: 0},
+		{name:'Fished Book', value: 1},
+		/**Tools*/
+		{name:'Pickaxe',value: 2},
+		{name:'Axe',value: 3},
+		{name:'Shovel',value: 4},
+		{name:'Hoe', value: 5},
+		{name:'Fishing Rod',value: 6},
+		/**Armour*/
+		{name:'Helmet',value: 7},
+		{name:'Chestplate',value: 8},
+		{name:'Leggings',value: 9},
+		{name:'Boots',value: 10},
+		/**Weapons*/
+		{name:'Sword',value: 11},
+		{name:'Bow',value: 12},
+		{name:'Crossbow',value: 13},
+		{name:'Trident',value:14},
+	]);
 	model.availableVersions = ko.observableArray([
 		{name:'1.2', value: '1.2'},
-		{name:'1.3.1', value: '1.3.1'}
+		{name:'1.3.1', value: '1.3.1'},
+		/**@SeeYou-Man */
+		{name:'1.20.2', value: '1.20.2'}
 		]);
 	model.version = ko.observable(null);
 	model.material = ko.observable(null);
