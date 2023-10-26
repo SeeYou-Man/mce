@@ -49,7 +49,7 @@ var makeViewModel = function()
 	model.availableVersions = ko.observableArray([
 		{name:'1.2', value: '1.2'},
 		{name:'1.3.1', value: '1.3.1'},
-		/**@SeeYou-Man */
+		/**@SeeYou-Man*/
 		{name:'1.20.2', value: '1.20.2'}
 		]);
 	model.version = ko.observable(null);

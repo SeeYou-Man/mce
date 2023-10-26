@@ -45,7 +45,7 @@ validateFields: function()
 	{
 		if(level > 30)
 			{
-				model.level(30) // Unsure if this is still the level cap in 1.20.2
+				model.level(30) // Unsure if this is still the level cap in 1.20.2 will check at a later instance
 			}
 	}
 

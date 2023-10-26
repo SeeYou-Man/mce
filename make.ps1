@@ -10,19 +10,19 @@ function MakeCss( $name )
 
 function ReplaceWithFile( $str, $name ) {
 	$pattern = MakePattern $name
-	$filecontents = gc $name
+	$filecontents = Get-Content $name
 	$replacementdata = [String]::Format("<script type=""text/javascript"">{0}</script>" , [String]::Join("`n",$filecontents))
 	$str.Replace( $pattern, $replacementdata );
 }
 
 function ReplaceWithCss( $str, $name ) {
 	$pattern = MakeCss $name
-	$filec = gc $name
+	$filec = Get-Content $name
 	$repl = [String]::Format("<style type=""text/css"">{0}</style>", [String]::Join("`n",$filec))
 	$str.Replace( $pattern, $repl );
 }
-rm mce.html
-gc index.html | Foreach-Object{
+Remove-Item mce.html
+Get-Content index.html | Foreach-Object{
 $one = ReplaceWithFile $_ "js/knockout.js"
 $two = ReplaceWithFile $one "js/storage.js"
 $three = ReplaceWithFile $two "js/tools.js"

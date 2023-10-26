@@ -1,3 +1,4 @@
+/** All code unless stated otherwise is made by github user @Zazcallabah */
 var makeMC = function(version) {
     /**/
     var N = function N() {
