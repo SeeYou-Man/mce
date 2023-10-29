@@ -125,17 +125,15 @@ var makeMC = function(version) {
         return validEnchantments[validEnchantments.length-1];
     };
 
-    /**/
+    /*@Zazcallabah Had a third option specifically made for Bows @SeeYou-Man removed it since he did not think it was required to have*/
     var getBaseEnchantmentLevel = function getBaseEnchantmentLevel(itemId, materialId) {
         var type = 0; // armor
-
-        if(itemId < 4) type = 1; // non-armor
-        if(itemId === 8) type = 2; // bow
+        if(!(itemId > 6 && itemId <10)) type = 1; // non-armor
 
         var levels =[
-			[10, 9,25,15,-1,12,-1], // armor
-			[10,14,22,-1, 5,-1,15], // non-armor
-			[1, 1, 1, 1, 1, 1, 1]]; // bow
+			[0, 15, 0, 12, 9, 25, 10, 9, 15, 1], // armor
+			[15, 0, 5, 0, 14, 22, 10, 0, 15, 1], // non-armor
+			];
 
         return levels[type][materialId];
     };
