@@ -73,7 +73,7 @@ var makeSim = function(page,tools,model){
 
 		var writeCInfo = function(enchantment,p,s,level)
 		{
-			return enchantment.name + " " + level + ": " + _tools.wrapPercent( p, s );
+			return enchantment.name + " " + level + ": " + tools.wrapPercent( p, s );
 		};
 		var eChart = makeChart("Probability that enchantment will be included");
 		model.addChart(eChart);

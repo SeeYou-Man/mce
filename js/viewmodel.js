@@ -47,8 +47,6 @@ var makeViewModel = function()
 		{name:'Trident',value:14},
 	]);
 	model.availableVersions = ko.observableArray([
-		{name:'1.2', value: '1.2'},
-		{name:'1.3.1', value: '1.3.1'},
 		/**@SeeYou-Man*/
 		{name:'1.20.2', value: '1.20.2'}
 		]);

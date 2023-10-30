@@ -35,11 +35,6 @@ validateFields: function()
 	var level = parseInt(model.level(),10);
 	if( level < 1 )
 		model.level(1);
-	if( model.version() === "1.3.1" )
-	{
-		if( level > 30 ) // new level cap in 1.3
-			model.level( 30 );
-	}
 	/**Code made by @SeeYou-Man*/
 	else if(model.version()=== "1.20.2")
 	{

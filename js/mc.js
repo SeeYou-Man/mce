@@ -145,30 +145,11 @@ var makeMC = function(version) {
         };
     }
 
-    if(version === "1.2") {
-        /* Algorithm source: Minecraft source extracted using Minecraft Coder Pack, source file: EnchantmentHelper.java */
-        var simulateEnchantments = function simulateEnchantments(model, level) {
-            return simulateEnchantmentsInternal(model.item(), model.material(), level, simulateDistr, getEnchantments, selectWeighted, stripeIncompatibleEnchantments, function(m){ return Math.floor(m / 2); });
-        };
-
-        return {
-            simulateEnchantments: simulateEnchantments,
-            getBaseEnchantmentLevel: getBaseEnchantmentLevel
-        };
-    }
-    else if(version === "1.3.1") {
-        var sim = function simulateEnchantments(model, level) {
-            return simulateEnchantmentsInternal(model.item(), model.material(), level, simulateDistr13, getEnchantments, selectWeighted, stripeIncompatibleEnchantments, function(m){ return m; });
-        };
-        return {
-            simulateEnchantments: sim,
-            getBaseEnchantmentLevel: getBaseEnchantmentLevel
-        };
-    }
+    
     /**Code made by SeeYouMan
  * Currently have just copied 1.3.1 verssion code
 */
-    else if(version === "1.20.2") {
+    if(version === "1.20.2") {
         var sim = function simulateEnchantments(model, level) {
             return simulateEnchantmentsInternal(model.item(), model.material(), level, simulateDistr13, getEnchantments, selectWeighted, stripeIncompatibleEnchantments, function(m){ return m; });
         };

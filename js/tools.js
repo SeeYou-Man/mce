@@ -1,158 +1,159 @@
 /** All code unless stated otherwise is made by github user @Zazcallabah */
-var makeTools = function () { return {
+var makeTools = function () {
+    return {
 
-foreach: function( list, callback, order )
-{
-	function keys(obj)
-	{
-		var keys = [];
-		for(var key in obj)
-		{
-			keys.push(key);
-		}
-		return keys;
-	}
+        foreach: function (list, callback, order) {
+            function keys(obj) {
+                var keys = [];
+                for (var key in obj) {
+                    keys.push(key);
+                }
+                return keys;
+            }
 
-	var sortedproperties = keys(list).sort();
-	for( var i = 0; i<sortedproperties.length;i++ )
-	{
-		var propname = sortedproperties[i];
+            var sortedproperties = keys(list).sort();
+            for (var i = 0; i < sortedproperties.length; i++) {
+                var propname = sortedproperties[i];
 
-		if( list.hasOwnProperty( propname ) )
-			callback( list[propname], propname );
-	}
-},
+                if (list.hasOwnProperty(propname)) 
+                    callback(list[propname], propname);
+                
+            }
+        },
 
-where: function( list, callback )
-{
-	var items = [];
-	this.foreach( list, function(item) {
-		if( callback( item ) )
-			items[items.length] = item;
-	});
-	return items;
-},
+        where: function (list, callback) {
+            var items = [];
+            this.foreach(list, function (item) {
+                if (callback(item)) 
+                    items[items.length] = item;
+                
+            });
+            return items;
+        },
 
-wrapPercent: function( p, s )
-{
-	return "(" + Math.floor( p * 100 ) + "+-" + Math.floor( s * 1000 ) / 10 + "%)";
-},
+        wrapPercent: function (p, s) {
+            return "(" + Math.floor(p * 100) + "+-" + Math.floor(s * 1000) / 10 + "%)";
+        },
 
-/*
+        /*
  * Using the ol' V = Σ(x^2) - ((ΣX)^2 /n) / (n-1)
  */
-updateSum: function( arr )
-{
-	this.foreach( arr, function (stats){
-		stats.sum += stats.x;
-		stats.sqsum += stats.x * stats.x;
-		stats.n++;
-		stats.mean = stats.sum / stats.n;
-		stats.variance = ( stats.sqsum - (stats.sum * stats.sum / stats.n)) / ( stats.n - 1 );
-		stats.x = 0;
-	} );
-},
+        updateSum: function (arr) {
+            this.foreach(arr, function (stats) {
+                stats.sum += stats.x;
+                stats.sqsum += stats.x * stats.x;
+                stats.n ++;
+                stats.mean = stats.sum / stats.n;
+                stats.variance = (stats.sqsum -(stats.sum * stats.sum / stats.n)) / (stats.n - 1);
+                stats.x = 0;
+            });
+        },
 
-validInt: function( i )
-{
-	return i < 0 ? false : !isNaN(i);
-},
+        validInt: function (i) {
+            return i < 0 ? false : !isNaN(i);
+        },
 
-ensureVar: function( target, variable, value )
-{
-	if( !target.hasOwnProperty( variable ) )
-		target[variable] = value;
-},
+        ensureVar: function (target, variable, value) {
+            if (! target.hasOwnProperty(variable)) 
+                target[variable] = value;
+            
+        },
 
-ensureStatsVars: function( vars, result )
-{
-	this.ensureVar( vars, result.enchantment.id, {} );
-	this.ensureVar( vars[result.enchantment.id], result.enchantmentLevel, {sum:0,sqsum:0,x:0,n:0} );
-}
+        ensureStatsVars: function (vars, result) {
+            this.ensureVar(vars, result.enchantment.id, {});
+            this.ensureVar(vars[result.enchantment.id], result.enchantmentLevel, {
+                sum: 0,
+                sqsum: 0,
+                x: 0,
+                n: 0
+            });
+        }
 
-}; };
-
-var makeIterator = function( action, callback, param ) { return {
-
-	run: function( times, model ){
-		for( var i = 0; i< times; i++ )
-		{
-			var result = action( model, param );
-			callback( result );
-		}
-	}
+    };
 };
 
+var makeIterator = function (action, callback, param) {
+    return {
+
+        run: function (times, model) {
+            for (var i = 0; i < times; i++) {
+                var result = action(model, param);
+                callback(result);
+            }
+        }
+    };
+
 };
 
-var makeCollection = function( tools ) {
-	var stats = {};
+var makeCollection = function (tools) {
+    var stats = {};
 
-	return {
+    return {
 
-		report: function( label )
-		{
-			this.addToStats( label, 1 );
-		},
+        report: function (label) {
+            this.addToStats(label, 1);
+        },
 
-		addToStats: function( label, value )
-		{
-			if( !stats.hasOwnProperty( label ) )
-				stats[label] = { sum:0, sqsum:0, x:0, n:0 };
-			stats[label].x += value;
-		},
+        addToStats: function (label, value) {
+            if (! stats.hasOwnProperty(label)) 
+                stats[label] = {
+                    sum: 0,
+                    sqsum: 0,
+                    x: 0,
+                    n: 0
+                };
+            
+            stats[label].x += value;
+        },
 
-		updateSum: function()
-		{
-			tools.updateSum(stats);
-		},
+        updateSum: function () {
+            tools.updateSum(stats);
+        },
 
-		foreach: function( callback )
-		{
-			tools.foreach( stats, callback );
-		},
-		find: function( label )
-		{
-			if( stats.hasOwnProperty(label))
-				return stats[label];
-			else return { sum:0, sqsum:0, x:0, n:0 };
-		}
-	};
+        foreach: function (callback) {
+            tools.foreach(stats, callback);
+        },
+        find: function (label) {
+            if (stats.hasOwnProperty(label)) 
+                return stats[label];
+             else 
+                return {sum: 0, sqsum: 0, x: 0, n: 0};
+            
+        }
+    };
 };
 
-var makeGroupedCollection = function( tools ) {
-	var collections = [];
-	return {
-		report: function( position, label )
-		{
-			if( !collections.hasOwnProperty( position ) )
-				collections[position] = makeCollection( tools );
-			collections[position].report( label );
-		},
+var makeGroupedCollection = function (tools) {
+    var collections = [];
+    return {
+        report: function (position, label) {
+            if (! collections.hasOwnProperty(position)) 
+                collections[position] = makeCollection(tools);
+            
+            collections[position].report(label);
+        },
 
-		find: function(position,label)
-		{
-			if(collections.hasOwnProperty( position ) )
-				return collections[position].find(label);
-			else return { sum:0, sqsum:0, x:0, n:0 };
-		},
+        find: function (position, label) {
+            if (collections.hasOwnProperty(position)) 
+                return collections[position].find(label);
+             else 
+                return {sum: 0, sqsum: 0, x: 0, n: 0};
+            
+        },
 
-		updateSum: function()
-		{
-			tools.foreach( collections, function (item){ item.updateSum(); } );
-		},
+        updateSum: function () {
+            tools.foreach(collections, function (item) {
+                item.updateSum();
+            });
+        },
 
-		foreach: function( controller )
-		{
-			tools.foreach(
-				collections,
-				function( collection, position )
-				{
-					controller.before( position );
-					collection.foreach( controller.callback );
-					controller.after();
-				} );
+        foreach: function (controller) {
+            tools.foreach(collections, function (collection, position) {
+                controller.before(position);
+                collection.foreach(controller.callback);
+                controller.after();
+            });
 
-		}
-	};
+        }
+    };
 };

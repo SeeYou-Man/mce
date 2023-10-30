@@ -345,7 +345,7 @@ var _enchantments = [
 		maxlevel: 1,
 		maxEnchant: function( i ){ return 65;},
 		minEnchant: function(){  return 15;},
-		canEnchant: function(mId,iId) { return iId >= 0 && iId <= 5; },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 5); },
 		applies: function( other ) { return other !== ("silktouch"||"fortune"||"looting"||"luckofthesea") },//This might work !( other === "fortune" || other === "silktouch" || other === "looting" || other === "luckofthesea" )
 		id: 27,
 		color: "darkviolet"
@@ -354,10 +354,14 @@ var _enchantments = [
 		name: "luckofthesea",
 		weight: 2,
 		minlevel: 1,
-		maxlevel: 1,
+		maxlevel: 3,
 		maxEnchant: function( i ){ return this.minEnchant(i) + 50;},
 		minEnchant: function( i ){  return 15+(i-1)*9;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 6 },
+		canEnchant: function(mId,iId) {
+			if (iId >= 0 && iId <=1)
+				return iId
+			else if (iId === 6)
+				return iId},
 		applies: function( other ) { return other !== ("luckofthesea"||"silktouch") },
 		id: 28,
 		color: "pink"
@@ -366,7 +370,7 @@ var _enchantments = [
 		name: "lure",
 		weight: 2,
 		minlevel: 1,
-		maxlevel: 1,
+		maxlevel: 3,
 		maxEnchant: function( i ){ return this.minEnchant(i) + 50;},
 		minEnchant: function( i ){  return 15+(i-1)*9;},
 		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 6 },
@@ -417,10 +421,10 @@ var _enchantments = [
 		maxlevel: 1,
 		maxEnchant: function( i ){ return 50;},
 		minEnchant: function( i ){  return 25;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 14 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 14 },
 		applies: function( other ) { return other !== ("channeling"||"riptide") },
 		id: 33,
-		color: "pink"
+		color: "red"
 	},
 	{
 		name: "impaling",
@@ -429,7 +433,7 @@ var _enchantments = [
 		maxlevel: 5,
 		maxEnchant: function( i ){ return this.minEnchant(i)+20;},
 		minEnchant: function( i ){  return 1+(i-1)*8;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 14 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 14 },
 		applies: function( other ) { return other !== "impaling" },
 		id: 34,
 		color: "pink"
@@ -441,7 +445,7 @@ var _enchantments = [
 		maxlevel: 3,
 		maxEnchant: function( i ){ return 50;},
 		minEnchant: function( i ){  return 12+(i-1)*7;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 14 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 14 },
 		applies: function( other ) { return other !== ("loyalty"||"riptide") },
 		id: 35,
 		color: "pink"
@@ -453,7 +457,7 @@ var _enchantments = [
 		maxlevel: 3,
 		maxEnchant: function( i ){ return 50;},
 		minEnchant: function( i ){  return 17+(i-1)*7;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 14 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 14 },
 		applies: function( other ) { return other !== ("riptide"||"channeling"||"loyalty") },
 		id: 36,
 		color: "pink"
@@ -465,7 +469,7 @@ var _enchantments = [
 		maxlevel: 1,
 		maxEnchant: function( i ){ return 50;},
 		minEnchant: function( i ){  return 20;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 13 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 13 },
 		applies: function( other ) { return other !== ("multishot"||"piercing") },
 		id: 37,
 		color: "pink"
@@ -477,7 +481,7 @@ var _enchantments = [
 		maxlevel: 4,
 		maxEnchant: function( i ){ return 50;},
 		minEnchant: function( i ){  return 1+(i-1)*10;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 13 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 13 },
 		applies: function( other ) { return other !== ("piercing"||"multishot") },
 		id: 38,
 		color: "pink"
@@ -489,7 +493,7 @@ var _enchantments = [
 		maxlevel: 3,
 		maxEnchant: function( i ){ return 50;},
 		minEnchant: function( i ){  return 12+(i-1)*20;},
-		canEnchant: function(mId,iId) { return iId === 0 || iId === 1 || iId === 13 },
+		canEnchant: function(mId,iId) { return (iId >= 0 && iId <= 1) || iId === 13 },
 		applies: function( other ) { return other !== "quickcharge" },
 		id: 39,
 		color: "pink"
