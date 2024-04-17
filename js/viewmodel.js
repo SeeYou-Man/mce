@@ -7,64 +7,67 @@
 var makeViewModel = function()
 {
 	var model = {};
+	
 	model.mode = ko.observable("level");
 	model.enchantmentMode = ko.computed(function(){return model.mode() === "enchantment" },model);
 	model.levelMode = ko.computed(function(){return model.mode() === "level" },model);
 	model.availableMaterials = ko.observableArray([
 		/**Made by @SeeYou-Man */
-		{name:'Wood',value: 0},
-		{name:'Leather',value: 1},
-		{name:'Stone',value: 2},
-		{name:'Chain',value:3},
-		{name:'Iron',value: 4},
-		{name:'Gold',value: 5},
-		{name:'Diamond',value: 6},
-		{name:'Turtle',value: 7},
-		{name:'Netherite',value: 8},
-		{name:'Other',value: 9},
+		{name:'Wood',		value: 0},
+		{name:'Leather',	value: 1},
+		{name:'Stone',		value: 2},
+		{name:'Chain',		value: 3},
+		{name:'Iron',		value: 4},
+		{name:'Gold',		value: 5},
+		{name:'Diamond',	value: 6},
+		{name:'Turtle',		value: 7},
+		{name:'Netherite',	value: 8},
+		{name:'Other',		value: 9},
 	]);
 	model.availableItems = ko.observableArray([
 		/**@SeeYou-Man
-		 * Changes: Added tolls and weapons which did not exists in 1.3
+		 * Changes: Added tools and weapons which did not exists in 1.3
 		 * hopefully this won't break anything whith those older versions*/
-		{name:'Book',value: 0},
-		{name:'Fished Book', value: 1},
+		{name:'Book',			value: 0},
+		{name:'Fished Book', 	value: 1},
 		/**Tools*/
-		{name:'Pickaxe',value: 2},
-		{name:'Axe',value: 3},
-		{name:'Shovel',value: 4},
-		{name:'Hoe', value: 5},
-		{name:'Fishing Rod',value: 6},
+		{name:'Pickaxe',		value: 2},
+		{name:'Axe',			value: 3},
+		{name:'Shovel',			value: 4},
+		{name:'Hoe',			value: 5},
+		{name:'Fishing Rod',	value: 6},
 		/**Armour*/
-		{name:'Helmet',value: 7},
-		{name:'Chestplate',value: 8},
-		{name:'Leggings',value: 9},
-		{name:'Boots',value: 10},
+		{name:'Helmet',			value: 7},
+		{name:'Chestplate',		value: 8},
+		{name:'Leggings',		value: 9},
+		{name:'Boots',			value: 10},
 		/**Weapons*/
-		{name:'Sword',value: 11},
-		{name:'Bow',value: 12},
-		{name:'Crossbow',value: 13},
-		{name:'Trident',value:14},
+		{name:'Sword',			value: 11},
+		{name:'Bow',			value: 12},
+		{name:'Crossbow',		value: 13},
+		{name:'Trident',		value: 14},
 	]);
 	model.availableVersions = ko.observableArray([
 		/**@SeeYou-Man*/
 		{name:'1.20.2', value: '1.20.2'}
 		]);
-	model.version = ko.observable(null);
-	model.material = ko.observable(null);
-	model.item = ko.observable(null);
-	model.level = ko.observable(null);
-	model.simulations = ko.observable(null);
-	model.iterations = ko.observable(null);
-	model.levelSimulations = ko.observable(null);
-	model.levelIterations = ko.observable(null);
-	model.stdev = ko.observable(null);
+	model.version = ko.observable();
+	model.material = ko.observable();
+	model.item = ko.observable();
+	
+	model.level = ko.observable();
+	model.simulations = ko.observable();
+	model.iterations = ko.observable();
+	model.levelSimulations = ko.observable();
+	model.levelIterations = ko.observable();
+	model.stdev = ko.observable();
 	model.availableEnchantments = ko.computed(function(){
 		var avail = [];
 		for( var e in _enchantments )
 		{
 			var ench = _enchantments[e];
-			if( ench.canEnchant(model.material(),model.item()) )
+			console.log(model.item())
+			if( ench.canEnchant(model.item()) ) /**Currently only checking if an enchant can enchant a specific item will later change so it checks for material aswell */
 				avail.push(ench);
 		}
 		return avail;
@@ -94,11 +97,12 @@ var makeViewModel = function()
 	var changeLevel = function( l )
 	{
 		var level = parseInt(model.level(),10);
+		console.log(l)
 		model.level( level + l);
 	};
 
 	model.addLevel = function(){changeLevel(1);};
-	model.removeLevel=function(){changeLevel(-1);};
+	model.removeLevel = function(){changeLevel(-1);};
 
 	model.setOnChanged = function( action ){
 		model.level.subscribe(action);

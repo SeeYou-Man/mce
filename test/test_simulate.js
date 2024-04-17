@@ -44,7 +44,7 @@ describe('enchantmentlist', function(){
 describe('simulation', function(){
 	it('can be run deterministically',function(){
 
-		expect( _enchantments.length ).toBe( 21 );
+		expect( _enchantments.length ).toBe( 37 );
 	});
 });
 

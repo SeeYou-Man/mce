@@ -173,7 +173,8 @@ var makeBarGroup = function( height, width, color, makeInfo, iterations, detaile
 };
 var makeDrawController = function( height, width, makeInfo, iterations, detailed, page, reportBack, chart )
 {
-	var currentEnchantment = undefined;
+	var currentEnchantment = _enchantments;
+	currentEnchantment.color = "white";
 	var probabilitySum = 0;
 
 	var maker = { currentColumnCount: function() { return 0; } };
